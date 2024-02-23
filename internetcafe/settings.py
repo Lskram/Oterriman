@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app_general.apps.AppGeneralConfig',
     'app_foods.apps.AppFoodsConfig',
+    'app_users.apps.AppUsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -118,3 +119,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Auth
+
+LOGIN_REDIRECT_URL = "HOME"
+LOGOUT_REDIRECT_URL = "HOME"

@@ -1,0 +1,18 @@
+{% extends 'app_general/components/base.html' %}
+
+{% block site_title %}เกี่ยวกับ | {% endblock  %}
+
+{% block content %}
+<section class="content-section content-section-single">
+    <div class="content-container">
+        <h2 class="content-title">เกี่ยวกับโอโตริ</h2>
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <p>
+                <button class="button button-pimary" type="submit">เข้าสู่ระบบ</button>
+            </p>
+        </form>
+    </div>
+</section>
+{% endblock %}
