@@ -1,0 +1,54 @@
+{% extends 'app_general/components/base.html' %}
+{% load static %}
+
+{% block site_title %}เมนูทั้งหมด | {% endblock  %}
+
+{% block content %}
+<section class="content-section content-section-single">
+    <div class="content-container">
+        <h2 class="content-title">เมนูอร่อย ส่งบ่อย ส่งเเม่น</h2>
+        {% if foods.count > 0 %}
+            <div class="grid grid-3">
+                {% for food in foods %}
+                    <div>
+                        <a href="{% url 'FOOD' food.id %}">
+                            <img class="image-block" src="{% static food.image_relative_url %}">
+                        </a>
+                        <h5 class="food-title">
+                            <a href="{% url 'FOOD' food.id %}">{{ food.title }}</a>
+                        </h5>
+                        {% if food.special_price is not None %}
+                            <p>
+                                <h6>
+                                    <span>{{ food.special_price }} บาท </span>
+                                    <del class="text-gray">{{ food.price|floatformat:'g' }} บาท </del>
+                                </h6>
+                            </p>
+                        {% else %}
+                            <p>
+                                <h6>
+                                    {{ food.price|floatformat:'g' }} บาท
+                                </h6>
+                            </p>
+                        {% endif %}
+                        {% if food.is_premium %}
+                            <p>
+                                <h6>
+                                    *** เมนูสุดพิเศษ Premium
+                                </h6>
+                            </p>
+                        {% endif %}
+                        <p>
+                            <h6>
+                                โปรโมชั่นถึงวันที่ {{ food.promotion_end_at | date:'j N Y'}}
+                            </h6>
+                        </p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>ไม่มีสินค้าในตอนนี้</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

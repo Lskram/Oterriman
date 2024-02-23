@@ -1,0 +1,39 @@
+{% extends 'app_general/components/base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="home-landing-section" >
+    <h1 class="home-landing-text">โอโตริเเมน</h1>
+    <h5 class="home-landing-text">ไอศครีมอร่อย ส่งบ่อย ส่งเเม่น</h5>
+    <h6 class="home-landing-text">เลือกช็อปชิม ช็อบใช้ได้อย่างง่ายๆผ่านเว็บบล็อคเกอร์ร้านค้าแห่งนี้ บริการทั่วถึงใจทุกท่านตลอด 24 ชั่วโมง</h6>
+    <p>
+        <a class="button" href="{% url 'FOODS' %}">ดูเมนูทั้งหมด</a>
+        <a class="button button-pimary" href="{% url 'subscription' %}">ลงทะเบียนรับโปรโมชั่น</a>
+    </p>
+</section>
+<section class="content-section">
+    <div class="content-section">
+            <h4 class="content-title text-center">อธิบายอะไรสักหน่อย</h4>
+        <div class="grid grid-3">
+            <div>
+                <img class="image-block" src="{% static 'app_general/Home.jpg' %}">
+                <h4>บทนำ</h4>
+                <p><h6>ในโลกของขนมหวานที่หลากหลาย และอร่อยไปด้วย เราพบกับ "โดนัท" นักผจญภัยในโลกของรสชาติที่มีเสน่ห์ และความอร่อยที่ไม่สิ้นสุด มันไม่ใช่เพียงขนมที่น่ากิน แต่เป็นที่มาของความประทับใจในทุกชิ้น</h6></p>
+            </div>
+            <div>
+                <img class="image-block" src="{% static 'app_general/Homeabout.jpg' %}">
+                <h4>รสชาติที่หวานหอม</h4>
+                <p><h6>ทุกคำล้ำลึกในสมุดบันทึกของโดนัทเป็นการบอกถึงความหอมหวานที่อร่อยยิ่งของขนมโดนัท. รสชาติที่หวานนุ่มนวลที่ละมุนละไมของโดนัททำให้มันเป็นอาหารหวานที่โดดเด่นและไม่ลืมไป</h6></p>
+            </div>
+            <div>
+                <img class="image-block" src="{% static 'app_general/Homeabout (2).jpg' %}">
+                <h4>ทานทุกชั้น, ทุกรสชาติ</h4>
+                <p><h6>ขนมโดนัทของโดนัทไม่ได้เสียความสำคัญเพียงแค่ในทรัพย์สินของมัน แต่ยังอยู่ที่การผสมผสานของวัตถุดิบชั้นยอดที่สร้างสรรค์รสชาติที่สมบูรณ์แบบ. ทุกชั้นของโดนัทกลายเป็นส่วนสำคัญของเรื่องราวอันสุดพิเศษของมัน</h6></p>
+            </div>
+        </div>
+        <p class="text-center">
+            <a class="button" href="{% url 'ABOUT' %}">เกี่ยวกับโอโตริเเมน</a>
+        </p>
+    </div>
+</section>
+{% endblock %}
