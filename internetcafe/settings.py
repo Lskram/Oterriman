@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'app_users.apps.AppUsersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app_general.apps.AppGeneralConfig',
     'app_foods.apps.AppFoodsConfig',
-    'app_users.apps.AppUsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +58,7 @@ ROOT_URLCONF = 'internetcafe.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'app_users/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -113,7 +114,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -125,3 +126,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = "HOME"
 LOGOUT_REDIRECT_URL = "HOME"
+LOGIN_URL = "login"
+
+AUTH_USER_MODEL = "app_users.CustomUser"
+AUTHENTICATION_BACKENDS = [
+    "app_users.utils.auth_email_backend.EmailBackend",
+    "django.contrib.auth.backends.ModelBackend"
+]
+
+# Email
+EMAIL_BACKEND ="django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = BASE_DIR /"test_inbox"
+PASSWORD_RESET_TIMEOUT = 600
+
+#admin123456789,Admin56161658@gmail.com,aeiou123

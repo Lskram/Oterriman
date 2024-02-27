@@ -236,3 +236,9 @@ input[type="email"]:focus {
   color: #111111;
   text-decoration: none;
 }
+
+/* # dark theme */
+body.dark {
+  color: white;
+  background-color: #474747;
+}

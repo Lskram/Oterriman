@@ -1,17 +1,19 @@
+from django.http import HttpRequest
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from app_general.forms import SubscriptionModelForm
-from .models import Subscription
+from datetime import datetime, timedelta
 
 
-def home(request):
+
+def home(request: HttpRequest):
     return render(request, 'app_general/home.html')
 
-def about(request):
+def about(request: HttpRequest):
     return render(request, 'app_general/about.html')
 
-def subscription(request):
+def subscription(request: HttpRequest):
     if request.method == 'POST':
         form = SubscriptionModelForm(request.POST)
         if form.is_valid():
@@ -22,5 +24,21 @@ def subscription(request):
     context = {'form': form}
     return render(request, 'app_general/subscription_from.html',context)
 
-def subscription_thankyou(request):
+def subscription_thankyou(request: HttpRequest):
     return render(request,'app_general/subscription_thankyou.html')
+
+def change_theme(request: HttpRequest):
+    referer = request.headers.get("referer")
+    if referer is not None:
+        response = HttpResponseRedirect(referer)
+    else:
+        response = HttpResponseRedirect(reverse("HOME"))
+    
+    # Change theme
+    theme = request.GET.get("theme")
+    if theme == "dark":
+        expired_date = datetime.now() + timedelta(days=365)
+        response.set_cookie("theme","dark",expires = expired_date)
+    else:
+        response.delete_cookie("theme")
+    return response

@@ -11,17 +11,21 @@
         <span>เกี่ยวกับ</span>
     </a>
     {% if user.is_authenticated %}
-        <a class="site-header-item" href="#">
+        <a class="site-header-item" href="{% url 'dashboard' %}">
             <span>{{ user.username }}</span>
         </a>
-        <a class="site-header-item" href="{% url 'logout' %}">
+        <a class="site-header-item" href="{% url 'logout' %}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             <span>ออกจากระบบ</span>
         </a>
+        <form id="logout-form" method="post" action="{% url 'logout' %}" style="display: none;">
+            {% csrf_token %}
+            <input type="submit" value="ออกจากระบบ">
+        </form>
     {% else %}
         <a class="site-header-item" href="{% url 'login' %}">
             <span>เข้าสู่ระบบ</span>
         </a>
-        <a class="site-header-item" href="#">
+        <a class="site-header-item" href="{% url 'register' %}">
             <span>สมัครสมาชิก</span>
         </a>
     {% endif %}
