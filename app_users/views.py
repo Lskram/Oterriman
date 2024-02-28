@@ -11,6 +11,7 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
 from app_users.utils.activation_token_generator import activation_token_generator
+from app_users.models import UserFavoriteFood
 # Create your views here.
 
 def register(request: HttpRequest):
@@ -79,7 +80,9 @@ def activate(request: HttpRequest, uidb64: str, token: str):
 
 @login_required
 def dashboard(request: HttpRequest):
-    return render(request, "app_users/dashboard.html",)
+    fovorite_food_pivots = request.user.favorite_food_pivot_set.order_by("-level")
+    context = {"fovorite_food_pivots":fovorite_food_pivots}
+    return render(request, "app_users/dashboard.html",context)
 
 @login_required
 def profile(request: HttpRequest):

@@ -40,3 +40,8 @@ class UserFavoriteFood(models.Model):
                 name="unique_user_food"
             )
         ]
+    
+    def level_label(self):
+        selected_level = [l for l in self.LEVELS if l[0] == self.level][0]
+        return selected_level[1]
+        

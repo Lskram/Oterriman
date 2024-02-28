@@ -12,6 +12,49 @@
             <a href="{% url 'password_change' %}">เปลี่ยนรหัสผ่าน</a>   
         </p>
         <h5>แดชบอร์ด</h5>
+        <h5>เมนูโปรด</h5>
+        {% for food_pivot in fovorite_food_pivots %}
+            {% with food=food_pivot.food %}
+                <div>
+                    <h3>{{ food.title }}</h3>
+                    <p>{{ food_pivot.level_label }}</p>
+                    {% if food.special_price is not None %}
+                        <p>
+                            <h6>
+                                <span>{{ food.special_price }} บาท </span>
+                                <del class="text-gray">{{ food.price|floatformat:'g' }} บาท </del>
+                            </h6>
+                        </p>
+                    {% else %}
+                            <p>
+                                <h6>
+                                    {{ food.price|floatformat:'g' }} บาท
+                                </h6>
+                            </p>
+                    {% endif %}
+                    {% if food.is_premium %}
+                        <p>
+                            <h6>
+                                *** เมนูสุดพิเศษ Premium
+                            </h6>
+                        </p>
+                    {% endif %}
+                    {% if food.promotion_end_at is not None %}
+                        <p>
+                            <h6>
+                                โปรโมชั่นถึงวันที่ {{ food.promotion_end_at | date:'j N Y'}}
+                            </h6>
+                        </p>
+                    {% endif %}
+                    <form action="{% url 'unfavorite_food' food.id %}" method="post">
+                        {% csrf_token %}
+                        <p>
+                            <button type="submit" >ลบเมนูโปรดนี้</button>
+                        </p>
+                    </form>
+                </div>
+            {% endwith %}
+        {% endfor %}
     </div>
 </section>
 {% endblock %}
